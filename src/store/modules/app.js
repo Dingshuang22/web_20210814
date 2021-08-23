@@ -5,7 +5,10 @@ import {
 
 const state = {
   // 城市
-  city: 'cq'
+  city: 'cq',
+  user: {
+    name: 'Alex'
+  }
 }
 
 const mutations = {

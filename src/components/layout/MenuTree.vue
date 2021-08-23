@@ -15,6 +15,7 @@
       <!-- 如果当前有子菜单，则显示 el-submenu ，在el-subment 里调用 递归组件 -->
       <el-submenu
         v-if='menu.children && menu.children.length>0'
+        :index="menu.route"
         :key="idx"
       >
         <template slot="title" >

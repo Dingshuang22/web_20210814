@@ -19,8 +19,7 @@ import ui from '@/plugins/ui'
 // icon
 import '@/icons'
 
-// table
-import FreeTable from '@/components/table/FreeTable'
+
 
 // element-ui
 import './plugins/element.js'
@@ -33,32 +32,31 @@ Vue.use(ui)
 // global filters
 import drag from '@/directive/el-drag-dialog'
 
-// LineMarker
-import LineMarker from '@/components/Charts/LineMarker'
 
-// dialog
-import MyDialog from '@/components/Dialog'
-import BaseDialog from '@/components/BaseDialog'
 
 // filters
 import * as filters from '@/filters'
 
 import QueryList from './components/QueryList'
 
+// 自定义按钮权限指令
+import permission from "@/directive/permission";
+Vue.use(permission)
+
 Vue.config.productionTip = false
+
+// 批量引入组件
+import components from './components'
+Vue.use(components)
 
 console.log('main.js')
 console.log(process.env.NODE_ENV)
 console.log(process.env.BASE_URL)
 Vue.use(api)
-Vue.use(FreeTable)
 Vue.use(drag)
 Vue.prototype.moment = Moment
 
-Vue.component('BaseDialog', BaseDialog)
-Vue.component('QueryList', QueryList)
-Vue.component('MyDialog', MyDialog)
-Vue.component('LineMarker', LineMarker)
+
 
 // register global utility filters
 Object.keys(filters).forEach((key) => {

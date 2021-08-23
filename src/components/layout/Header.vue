@@ -20,7 +20,7 @@
         <!-- 用户名下拉菜单 -->
         <el-dropdown class="user-name" trigger="click" @command="handleCommand">
                     <span class="el-dropdown-link">
-                        {{username}}
+                        {{user.name}}
                         <i class="el-icon-caret-bottom"></i>
                     </span>
           <el-dropdown-menu slot="dropdown">
@@ -45,6 +45,7 @@
 
 <script>
 import {bus} from '@/utils/bus'
+import {mapState} from 'vuex'
 export default {
   name: 'Header',
   props: {},
@@ -97,6 +98,9 @@ export default {
     }
   },
   computed: {
+    ...mapState('app',[
+      'user'
+    ]),
     username () {
       let username = 'Alex'
       return username || this.name
