@@ -10,7 +10,7 @@
 */
 <template>
   <div>
-    <div class="page-title">
+    <div class="page-title" v-clipboard="'统计款项'">
       统计款项
     </div>
     <div class="display-flex justify-content-space-between align-items-center static-wrap mg-t-14">
@@ -108,6 +108,7 @@ export default {
   },
   computed: {},
   created () {
+
     this.$api.system.getGroups()
       .then(res => {
         console.log(res)

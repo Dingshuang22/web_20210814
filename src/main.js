@@ -39,6 +39,10 @@ import * as filters from '@/filters'
 
 import QueryList from './components/QueryList'
 
+// 复制粘贴
+import clipboard from "@/directive/clipboard";
+Vue.use(clipboard)
+
 // 自定义按钮权限指令
 import permission from "@/directive/permission";
 Vue.use(permission)
@@ -56,7 +60,10 @@ Vue.use(api)
 Vue.use(drag)
 Vue.prototype.moment = Moment
 
-
+// 添加实例属性
+Object.assign(Vue.prototype, {
+  formValidate: require('./utils/formValidate').default, // 表单验证
+})
 
 // register global utility filters
 Object.keys(filters).forEach((key) => {
