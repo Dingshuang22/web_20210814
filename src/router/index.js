@@ -35,6 +35,13 @@ const createRouter = routes => new Router({
       name: 'Login',
       component: (resolve) => require(['@/views/Login/Login'], resolve),
       meta: {title: '登陆'}
+    },
+    {
+      path: '/lockscreen',
+      name: 'LockScreen',
+      route:'/lockscreen',
+      component: resolve => require(['@/views/LockScreen/LockScreen'], resolve),
+      meta: {title: '锁屏', icon: 'dashboard'}
     }
 
   ]

@@ -6,7 +6,7 @@ import {
 const state = {
   // 城市
   city: 'cq',
-  user: {
+  userInfo: {
     name: 'Alex'
   }
 }

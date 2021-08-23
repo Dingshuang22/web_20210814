@@ -4,6 +4,7 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import store from "./store"
+const brh = require('./utils/brh').default
 
 // this.time = this.moment(this.time).format('YYYY-MM-DD HH:mm:ss')
 import Moment from 'moment'
@@ -18,6 +19,7 @@ import ui from '@/plugins/ui'
 
 // icon
 import '@/icons'
+import './permission' // permission control
 
 
 
@@ -62,6 +64,7 @@ Vue.prototype.moment = Moment
 
 // 添加实例属性
 Object.assign(Vue.prototype, {
+  brh, // 公共方法
   formValidate: require('./utils/formValidate').default, // 表单验证
 })
 
@@ -70,10 +73,12 @@ Object.keys(filters).forEach((key) => {
   Vue.filter(key, filters[key])
 })
 /* eslint-disable no-new */
-new Vue({
+const vm = new Vue({
   el: '#app',
   router,
   store,
   components: { App },
   template: '<App/>'
 })
+
+export default vm

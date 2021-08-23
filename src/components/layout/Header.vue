@@ -17,10 +17,11 @@
     </div>
     <div class="header-right">
       <div class="header-user-con">
+        <svg-icon icon-class="lock" class="lock-screen" @click="onLockScreen"></svg-icon>
         <!-- 用户名下拉菜单 -->
         <el-dropdown class="user-name" trigger="click" @command="handleCommand">
                     <span class="el-dropdown-link">
-                        {{user.name}}
+                        {{userInfo.userName}}
                         <i class="el-icon-caret-bottom"></i>
                     </span>
           <el-dropdown-menu slot="dropdown">
@@ -45,7 +46,7 @@
 
 <script>
 import {bus} from '@/utils/bus'
-import {mapState} from 'vuex'
+import { mapGetters } from 'vuex'
 export default {
   name: 'Header',
   props: {},
@@ -98,8 +99,8 @@ export default {
     }
   },
   computed: {
-    ...mapState('app',[
-      'user'
+    ...mapGetters([
+      'userInfo'
     ]),
     username () {
       let username = 'Alex'
@@ -126,6 +127,12 @@ export default {
     })
   },
   methods: {
+    // 锁屏状态
+    onLockScreen () {
+      this.$router.push({
+        name: 'LockScreen'
+      })
+    },
     //  折叠按钮
     collapseChage () {
       this.collapse = !this.collapse
@@ -213,6 +220,10 @@ export default {
 }
 .user-name {
   margin-left: 10rem;
+}
+.lock-screen {
+  width: 40rem !important;
+  height: 40rem !important;
 }
 .user-avator {
   margin-left: 20rem;

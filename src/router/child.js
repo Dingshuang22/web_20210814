@@ -4,12 +4,13 @@ const constantRoutes = [
     path: '/dashboard',
     name: 'Dashboard',
     route:'/dashboard',
-    component: () => import('@/views/Dashboard/Dashboard.vue'),
+    component: resolve => require(['@/views/Dashboard/Dashboard'], resolve),
     meta: {title: '首页', icon: 'dashboard'}
   }
 
 ]
 const routes = [
+
     {
       path: '/bill',
       name: 'Bill',

@@ -20,13 +20,17 @@ export default function $axios(options) {
     //request 拦截器
     instance.interceptors.request.use(
       config => {
+        // 部分接口timeout时间单独处理
+        if (config.url.indexOf('Synchronization') > -1 || config.url.indexOf('Extend/Email/Receive') > -1 ||
+          config.url.indexOf('Permission/Authorize/Data') > -1 || config.url.indexOf('PlatForm/DbSync/Actions/Execute') > -1) {
+          config.timeout = 100000
+        }
         if (config.method === 'post') {
           if (config.data.__proto__ === FormData.prototype
             || config.url.endsWith('path')
             || config.url.endsWith('mark')
             || config.url.endsWith('patchs')
           ) {
-
           } else {
             config.data = qs.stringify(config.data)
           }
