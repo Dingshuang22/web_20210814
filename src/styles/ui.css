@@ -1,0 +1,49 @@
+/**
+ 提示框 提示背景色
+  */
+.messageInfo{
+  background-color: #2F96B4;
+  color:red !important;
+}
+.messageInfo div,
+.messageInfo i,
+.messageInfo h2{
+  color:#ffffff !important;
+}
+/**
+提示框警告背景色
+ */
+.messageWarn{
+  background-color: #f89406 !important;
+}
+
+.messageWarn div,
+.messageWarn i,
+.messageWarn h2 {
+  color:#ffffff !important;
+}
+/**
+提示框错误背景色
+*/
+.messageError{
+  background-color: #BD362F !important;
+  color:#ffffff !important;
+}
+.messageError div,
+.messageError i,
+.messageError h2{
+  color:#ffffff !important;
+}
+/**
+提示框成功背景色
+ */
+.messageSuccess{
+  background-color: #51a351 !important;
+
+}
+.messageSuccess div,
+.messageSuccess i,
+.messageSuccess h2{
+  color:#ffffff !important;
+}
+

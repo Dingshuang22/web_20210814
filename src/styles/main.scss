@@ -1,0 +1,26 @@
+//  reset element-ui
+.el-button--primary {
+  color: #FFF;
+  background-color: #1F6BCF;
+}
+
+// reset tag
+.el-tag.el-tag--success {
+  color: #07D23E;
+  //background: #D2FFE8;
+  border: 1px solid #4FE377;
+  //opacity: 0.18;
+  border-radius: 2px;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.el-tag.el-tag--warning {
+  color: #E3A859;
+  //background: #FFEED6;
+  border: 1px solid #E3A859;
+  //opacity: 0.18;
+  border-radius: 2px;
+  font-size: 14px;
+  font-weight: 400;
+}
