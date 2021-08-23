@@ -1,3 +1,13 @@
+/**
+* @Author: Alex-Shuang
+* @createdTime: 2021-05-25 09:13
+* @description:
+* @version：v1.0
+* @Modify record：
+* @Modify content：
+* @Modifier：
+* @Change the time：
+*/
 <template>
   <svg :class="svgClass" aria-hidden="true" v-on="$listeners">
     <use :xlink:href="iconName" />
@@ -34,9 +44,9 @@ export default {
 
 <style scoped>
 .svg-icon {
-  width: 1px;
-  height: 1px;
-  vertical-align: -0.15px;
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.15em;
   fill: currentColor;
   overflow: hidden;
 }

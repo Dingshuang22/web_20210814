@@ -1,12 +1,12 @@
-import axios from 'axios'
-import config from './config'
-import qs from 'qs'
+import axios from 'axios';
+import config from './config';
+import qs from 'qs';
 import router from '@/router'
 import logger from './logger'
-// import store from '@/store'
+import store from '@/store'
 
 
-export default function $axios (options) {
+export default function $axios(options) {
   return new Promise((resolve, reject) => {
     const instance = axios.create({
       baseURL: config.baseURL,
@@ -15,17 +15,16 @@ export default function $axios (options) {
       }]
     })
     logger.requestId++
-    let startRequestTime = new Date().getTime()
+    let startRequestTime = new Date().getTime();
     let requestId = logger.requestId
-    // request 拦截器
+    //request 拦截器
     instance.interceptors.request.use(
       config => {
         if (config.method === 'post') {
-          // eslint-disable-next-line no-proto
-          if (config.data.__proto__ === FormData.prototype ||
-            config.url.endsWith('path') ||
-            config.url.endsWith('mark') ||
-            config.url.endsWith('patchs')
+          if (config.data.__proto__ === FormData.prototype
+            || config.url.endsWith('path')
+            || config.url.endsWith('mark')
+            || config.url.endsWith('patchs')
           ) {
 
           } else {
@@ -34,8 +33,8 @@ export default function $axios (options) {
         }
 
         if (localStorage.accessToken) {
-          config.headers['Authorization'] = localStorage.accessToken
-          config.headers['Accept'] = 'application/json'
+          config.headers['Authorization'] = localStorage.accessToken;
+          config.headers['Accept'] = 'application/json';
         }
         return config
       },
@@ -52,8 +51,8 @@ export default function $axios (options) {
         const errorInfo = error.response
         console.log(errorInfo)
         if (errorInfo) {
-          error = errorInfo.data // 页面那边catch的时候就能拿到详细的错误信息,看最下边的Promise.reject
-          const errorStatus = errorInfo.status // 404 403 500 ...
+          error = errorInfo.data  // 页面那边catch的时候就能拿到详细的错误信息,看最下边的Promise.reject
+          const errorStatus = errorInfo.status; // 404 403 500 ...
           router.push({
             path: `/error/${errorStatus}`
           })
@@ -66,31 +65,30 @@ export default function $axios (options) {
     instance.interceptors.response.use(
       response => {
         // 判断一下响应中是否有 token，如果有就直接使用此 token 替换掉本地的 token。
-        // 检测token
-        // var token = response.headers.token
-        // if (token) {
-        //   store.dispatch('refreshToken', token)
-        // }
-        let data
+        var token = response.headers.authorization;
+        if (token) {
+          store.dispatch('refreshToken', token);
+        }
+        let data;
         // IE9时response.data是undefined，因此需要使用response.request.responseText(Stringify后的字符串)
-        if (response.data === undefined) {
+        if (response.data == undefined) {
           data = JSON.parse(response.request.responseText)
         } else {
           data = response.data
         }
-        if (data.code !== 200) {
+        if (data.code != 200) {
           logger.show(requestId, [
             {name: 'error', value: options.method.toUpperCase() + ' => ' + options.url},
             {name: 'params', value: Object.assign({}, options.data)},
             {name: 'message', value: data.errCode + ' => ' + data.message},
-            {name: 'result', value: Object.assign({}, data.data)}
-          ], startRequestTime)
+            {name: 'result', value: Object.assign({}, data.data)},
+          ], startRequestTime);
         } else {
           logger.show(requestId, [
             {name: 'success', value: options.method.toUpperCase() + ' => ' + options.url},
             {name: 'params', value: Object.assign({}, options.data)},
-            {name: 'result', value: Object.assign({}, data.data)}
-          ], startRequestTime)
+            {name: 'result', value: Object.assign({}, data.data)},
+          ], startRequestTime);
         }
         // 根据返回的code值来做不同的处理
         // switch (data.rc) {
@@ -111,10 +109,11 @@ export default function $axios (options) {
         return data
       },
       err => {
-        let allowStatus = [400, 401, 500]
-        if (allowStatus.indexOf(err.response.status) > -1) {
+        let allowStatus = [400,401,500];
+        if(allowStatus.indexOf(err.response.status) > -1) {
           return Promise.resolve(JSON.parse(err.response.request.response))
         }
+
         if (err && err.response) {
           switch (err.response.status) {
             case 400:
@@ -157,8 +156,8 @@ export default function $axios (options) {
           {name: 'error', value: options.method.toUpperCase() + ' => ' + options.url},
           {name: 'params', value: Object.assign({}, options.data)},
           {name: 'message', value: err.message},
-          {name: 'result', value: err}
-        ], startRequestTime)
+          {name: 'result', value: err},
+        ], startRequestTime);
         // 返回接口返回的错误信息
         return Promise.reject(err)
       }
